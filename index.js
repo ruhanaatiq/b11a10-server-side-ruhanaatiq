@@ -4,16 +4,10 @@ require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000; // Change port to 5000 or any free port
 
 app.use(cors());
 app.use(express.json());
-
-const corsOptions = {
-  origin: '*', // For development only. Replace with your frontend URL in production
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
-};
 
 
 
@@ -50,7 +44,7 @@ async function run() {
         res.status(500).json({ error: "Failed to fetch recipes" });
       }
     });
-
+    
     // Get top 6 recipes by likes
     app.get("/recipes/top", async (req, res) => {
       try {
@@ -160,6 +154,7 @@ async function run() {
 run().catch(console.dir);
 
 // Start server
+
 app.listen(port, () => {
   console.log(`Recipe app running on port ${port}`);
 });
