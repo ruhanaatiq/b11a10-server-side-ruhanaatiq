@@ -137,4 +137,6 @@ app.delete("/recipes/:id", async (req, res) => {
 });
 
 // Export Express app as a serverless function handler
-module.exports = app;
+const serverless = require("serverless-http");
+module.exports = serverless(app);
+
