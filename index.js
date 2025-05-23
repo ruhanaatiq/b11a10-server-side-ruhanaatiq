@@ -9,8 +9,6 @@ const port = process.env.PORT || 5000; // Change port to 5000 or any free port
 app.use(cors());
 app.use(express.json());
 
-
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.neq8pcg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Mongo client
@@ -25,7 +23,7 @@ const client = new MongoClient(uri, {
 // Main function
 async function run() {
   try {
-    await client.connect();
+   //await client.connect();
     console.log("Connected to MongoDB!");
 
     const recipeCollection = client.db("recipeDB").collection("recipes");
@@ -144,7 +142,7 @@ async function run() {
     });
 
     // Ping Mongo
-    await client.db("admin").command({ ping: 1 });
+   // await client.db("admin").command({ ping: 1 });
     console.log("MongoDB connection verified.");
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
