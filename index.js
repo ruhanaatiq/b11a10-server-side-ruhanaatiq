@@ -153,4 +153,7 @@ run().catch(console.dir);
 
 // Start server
 
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Recipe app running on port ${port}`);
+});
+
