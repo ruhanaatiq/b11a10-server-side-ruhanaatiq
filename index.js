@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000; // Change port to 5000 or any free port
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.neq8pcg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = process.env.MONGODB_URI;
 
 // Mongo client
 const client = new MongoClient(uri, {
@@ -23,7 +23,7 @@ const client = new MongoClient(uri, {
 // Main function
 async function run() {
   try {
-   //await client.connect();
+   await client.connect();
     console.log("Connected to MongoDB!");
 
     const recipeCollection = client.db("recipeDB").collection("recipes");
@@ -153,6 +153,4 @@ run().catch(console.dir);
 
 // Start server
 
-app.listen(port, () => {
-  console.log(`Recipe app running on port ${port}`);
-});
+module.exports = app;
