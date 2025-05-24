@@ -23,7 +23,7 @@ const client = new MongoClient(uri, {
 // Main function
 async function run() {
   try {
-   //await client.connect();
+    // await client.connect();
     console.log("Connected to MongoDB!");
 
     const recipeCollection = client.db("recipeDB").collection("recipes");
@@ -42,7 +42,7 @@ async function run() {
         res.status(500).json({ error: "Failed to fetch recipes" });
       }
     });
-    
+
     // Get top 6 recipes by likes
     app.get("/recipes/top", async (req, res) => {
       try {
@@ -142,21 +142,18 @@ async function run() {
     });
 
     // Ping Mongo
-   // await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log("MongoDB connection verified.");
 
-  } 
-  finally {
-        // Ensures that the client will close when you finish/error
-        // await client.close();catch (err) {
-    console.error("Error connecting to MongoDB:", err);
+  } finally {
+    // Ensures that the client will close when you finish/error
+    // await client.close();
   }
 }
 
 run().catch(console.dir);
 
 // Start server
-
 app.listen(port, () => {
   console.log(`Recipe app running on port ${port}`);
 });
